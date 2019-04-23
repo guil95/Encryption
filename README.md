@@ -2,11 +2,17 @@
 
 # Encrypt
 ```php
-//@param string $value
+/**
+ * @param string $value
+ * @return string
+ */
 $encrypt = (new Encryption())->encrypt($value);
 ```
 # Decrypt
 ```php
-//@return string
+/**
+ * @param string $encrypt
+ * @return string
+ */
 $decrypt = (new Encryption())->decrypt($encrypt);
 ```
