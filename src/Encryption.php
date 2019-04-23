@@ -23,13 +23,17 @@ class Encryption
      */
     public function encrypt(string $value): string
     {
-        return base64_encode(openssl_encrypt(
-            $value,
-            self::ENCRYPT_METHOD,
-            $this->key,
-            0,
-            $this->iv
-        ));
+        return trim(
+            base64_encode(
+                openssl_encrypt(
+                    $value,
+                    self::ENCRYPT_METHOD,
+                    $this->key,
+                    0,
+                    $this->iv
+                )
+            )
+        );
     }
 
     /**
@@ -38,12 +42,14 @@ class Encryption
      */
     public function decrypt(string $value): string
     {
-        return openssl_decrypt(
-            base64_decode($value),
-            self::ENCRYPT_METHOD,
-            $this->key,
-            0,
-            $this->iv
+        return trim(
+            openssl_decrypt(
+                base64_decode($value),
+                self::ENCRYPT_METHOD,
+                $this->key,
+                0,
+                $this->iv
+            )
         );
     }
 }
