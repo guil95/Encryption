@@ -8,6 +8,6 @@ $encrypt = (new Encryption())->encrypt($argv[1]);
 
 print_r($encrypt.PHP_EOL);
 
-$decrypt = (new Encryption())->decrypt($encrypt);
+$decrypt = (new Encryption())->decrypt('d');
 
-print_r($decrypt.PHP_EOL);
+var_dump($decrypt);
