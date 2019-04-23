@@ -23,13 +23,13 @@ class Encryption
      */
     public function encrypt(string $value): string
     {
-        return openssl_encrypt(
+        return base64_encode(openssl_encrypt(
             $value,
             self::ENCRYPT_METHOD,
             $this->key,
             0,
             $this->iv
-        );
+        ));
     }
 
     /**
@@ -39,7 +39,7 @@ class Encryption
     public function decrypt(string $value): string
     {
         return openssl_decrypt(
-            $value,
+            base64_decode($value),
             self::ENCRYPT_METHOD,
             $this->key,
             0,
