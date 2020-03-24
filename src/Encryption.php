@@ -4,17 +4,15 @@ namespace App;
 
 class Encryption
 {
-    const SECRET_KEY = '5B064F6D0374F491C5972ACAFDEBC14B23BCCE5C7C831C31023C07DC0872624E';
-    const SECRET_IV = '7A0AFDB3C64B9B5EDE3DFF9E95BC29AE';
     const ENCRYPT_METHOD = 'AES-256-CBC';
-
+    
     private $key;
     private $iv;
 
-    public function __construct()
+    public function __construct(string $secretKey, string $secretIv)
     {
-        $this->key = hash('sha512', self::SECRET_KEY);
-        $this->iv = substr(hash('sha512', self::SECRET_IV), 0, 16);
+        $this->key = hash('sha512', $secretKey);
+        $this->iv = substr(hash('sha512', $secretIv), 0, 16);
     }
 
     /**
