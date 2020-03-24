@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Encryption
+final class Encryption
 {
     const ENCRYPT_METHOD = 'AES-256-CBC';
     
