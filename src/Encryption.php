@@ -13,8 +13,8 @@ class Encryption
 
     public function __construct()
     {
-        $this->key = hash('sha256', self::SECRET_KEY);
-        $this->iv = substr(hash('sha256', self::SECRET_IV), 0, 16);
+        $this->key = hash('sha512', self::SECRET_KEY);
+        $this->iv = substr(hash('sha512', self::SECRET_IV), 0, 16);
     }
 
     /**
