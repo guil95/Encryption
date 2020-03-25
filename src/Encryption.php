@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Encryption;
 
 final class Encryption
 {
