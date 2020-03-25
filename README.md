@@ -6,7 +6,7 @@
  * @param string $value
  * @return string
  */
-$encrypt = (new Encryption())->encrypt($value);
+$encrypt = (new Encryption('SECRET_KEY', 'SECRET_IV'))->encrypt($value);
 ```
 # Decrypt
 ```php
@@ -14,5 +14,5 @@ $encrypt = (new Encryption())->encrypt($value);
  * @param string $encrypt
  * @return string
  */
-$decrypt = (new Encryption())->decrypt($encrypt);
+$decrypt = (new Encryption('SECRET_KEY', 'SECRET_IV'))->decrypt($encrypt);
 ```
