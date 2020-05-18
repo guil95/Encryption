@@ -41,7 +41,7 @@ final class EncryptionTest extends TestCase
         self::assertArrayHasKey('iv',$encryption);
     }
 
-    public function testDecryptByReturnFromEncrypt()
+    public function testDecrypt()
     {
         $name = 'Guilherme';
 
