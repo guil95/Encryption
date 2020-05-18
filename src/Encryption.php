@@ -1,37 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Encryption;
 
 final class Encryption
 {
     const ENCRYPT_METHOD = 'AES-256-CBC';
-    
+
+    /**
+     * @var string
+     */
     private $key;
+
+    /**
+     * @var string
+     */
     private $iv;
 
-    public function __construct(string $secretKey, string $secretIv)
+    /**
+     * Encryption constructor.
+     * @param string|null $secretKey
+     * @param string|null $iv
+     */
+    public function __construct(string $secretKey = null, string $iv = null)
     {
-        $this->key = hash('sha512', $secretKey);
-        $this->iv = substr(hash('sha512', $secretIv), 0, 16);
+        if ($iv && strlen($iv) != 16) {
+            throw new \RuntimeException('Invalid value for "iv"');
+        }
+
+        $this->key = $secretKey ?? hash('sha512', openssl_random_pseudo_bytes(16));
+        $this->iv = $iv ?? substr(hash('sha512', openssl_random_pseudo_bytes(16)), 0, 16);
     }
 
     /**
      * @param string $value
-     * @return string
+     * @return array
      */
-    public function encrypt(string $value): string
+    public function encrypt(string $value): array
     {
-        return trim(
-            base64_encode(
-                openssl_encrypt(
-                    $value,
-                    self::ENCRYPT_METHOD,
-                    $this->key,
-                    0,
-                    $this->iv
+        return [
+            'encryption' => trim(
+                base64_encode(
+                    openssl_encrypt(
+                        $value,
+                        self::ENCRYPT_METHOD,
+                        $this->key,
+                        0,
+                        $this->iv
+                    )
                 )
-            )
-        );
+            ),
+            'secretKey' => $this->key,
+            'iv' => $this->iv
+        ];
     }
 
     /**
